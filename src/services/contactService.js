@@ -6,6 +6,10 @@ class ContactService {
         const newContact = new Contact({ name, email, subject, message});
         return await newContact.save()
     }
+
+    async getAllContacts(){
+        return await Contact.find();
+    }
    
 
 };

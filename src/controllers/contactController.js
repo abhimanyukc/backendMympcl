@@ -11,6 +11,15 @@ class ContactController {
             res.status(500).json({error:error.message})
         }
     }
+
+       async getAllContacts(req, res){
+        try{
+              const contacts = await contactService.getAllContacts();
+              res.json(contacts);
+        }catch(error) {
+            res.status(500).json({error:error.message});
+        }
+       }
 };
 
 module.exports =  new  ContactController();
