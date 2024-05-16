@@ -10,8 +10,6 @@ class ContactService {
     async getAllContacts(){
         return await Contact.find();
     }
-   
-
 };
 
 module.exports = new ContactService();

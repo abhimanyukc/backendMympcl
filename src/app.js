@@ -10,7 +10,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors")
 
 const contactRoutes = require("./routes/contactRoute");
-
+ const emiRoutes = require("./routes/emiRoute");
+ const kycRoutes = require("./routes/kycRoute");
 //USING express function
 const app = express();
 
@@ -34,5 +35,6 @@ app.use(cors());
   
 // api url
 app.use("/api/contact/", contactRoutes);
-
+app.use("/api/emicalculator/",  emiRoutes);
+app.use("/api/kyc/",  kycRoutes);
 
