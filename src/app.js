@@ -12,6 +12,7 @@ const cors = require("cors")
 const contactRoutes = require("./routes/contactRoute");
  const emiRoutes = require("./routes/emiRoute");
  const kycRoutes = require("./routes/kycRoute");
+ const applicationRoutes = require("./routes/applicationFormRoute");
 //USING express function
 const app = express();
 
@@ -37,4 +38,5 @@ app.use(cors());
 app.use("/api/contact/", contactRoutes);
 app.use("/api/emicalculator/",  emiRoutes);
 app.use("/api/kyc/",  kycRoutes);
+app.use("/api/career/ApplicationForm/", applicationRoutes );
 
