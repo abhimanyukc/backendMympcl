@@ -1,15 +1,12 @@
-
-//creating contact model in nodejs
-//importing mongoose from dbConfig.js file
 const mongoose = require("../configuration/dbConfig");
+const { Schema } = mongoose;
 
-const applicationSchema = new mongoose.Schema({
-    
-    message:String,
+const applicationSchema = new Schema({
+    message: String,
     email: String,
-    cv: String,
-    coverLetter: String
-})
+    cv: { type: Schema.Types.ObjectId, ref: 'File' }, // Reference to File model
+    coverLetter: { type: Schema.Types.ObjectId, ref: 'File' } // Reference to File model
+});
 
 const Application = mongoose.model("Application", applicationSchema);
 
