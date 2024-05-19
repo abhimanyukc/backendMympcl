@@ -1,42 +1,34 @@
-//main app.js file
-
-//importing express
 const express = require("express");
-
-// body-parser is often used in the Express.js backend. It's a middleware that parses incoming request bodies before handling them, making it easier to work with JSON, URL-encoded, or form data. This module simplifies the process of accessing request data in your Express.js routes.
 const bodyParser = require("body-parser");
-
-//importing cors
-const cors = require("cors")
+const cors = require("cors");
+const fs = require('fs');
+const path = require('path');
 
 const contactRoutes = require("./routes/contactRoute");
- const emiRoutes = require("./routes/emiRoute");
- const kycRoutes = require("./routes/kycRoute");
- const applicationRoutes = require("./routes/applicationFormRoute");
-//USING express function
+const emiRoutes = require("./routes/emiRoute");
+const kycRoutes = require("./routes/kycRoute");
+const applicationRoutes = require("./routes/applicationFormRoute");
+
 const app = express();
 
-
-//we will write configuration to set port of nodejs application
 const PORT = process.env.PORT || 5000;
-  
-    
-// app.get('/', (req, res) => {
-//     res.send('Hello, World!');
-//   });
 
 app.use(bodyParser.json());
 app.use(cors());
-    //run this server in server/src
-    //listening port
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-    })
- 
-  
-// api url
-app.use("/api/contact/", contactRoutes);
-app.use("/api/emicalculator/",  emiRoutes);
-app.use("/api/kyc/",  kycRoutes);
-app.use("/api/career/ApplicationForm/", applicationRoutes );
 
+// Create 'uploads' directory if it doesn't exist
+if (!fs.existsSync('uploads')) {
+    fs.mkdirSync('uploads');
+}
+
+// Serve static files from the 'uploads' directory
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.use("/api/contact/", contactRoutes);
+app.use("/api/emicalculator/", emiRoutes);
+app.use("/api/kyc/", kycRoutes);
+app.use("/api/career/ApplicationForm/", applicationRoutes);
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});
