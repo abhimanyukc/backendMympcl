@@ -1,5 +1,6 @@
 
-//controller
+
+//controller file
 const applicationService = require("../services/applicationFormService");
 
 class ApplicationController {
@@ -20,6 +21,7 @@ class ApplicationController {
             saveApplication.cv = `${req.protocol}://${req.get('host')}/${saveApplication.cv?.replace(/\\/g, '/')}`;
             saveApplication.coverLetter = `${req.protocol}://${req.get('host')}/${saveApplication.coverLetter?.replace(/\\/g, '/')}`;
 
+            
             res.json(saveApplication);
         } catch (error) {
             res.status(500).json({ error: error.message });

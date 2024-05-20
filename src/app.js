@@ -1,3 +1,6 @@
+
+
+//app.js
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -21,8 +24,9 @@ if (!fs.existsSync('uploads')) {
     fs.mkdirSync('uploads');
 }
 
-// Serve static files from the 'uploads' directory
+// Serving static files from the 'uploads' directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 app.use("/api/contact/", contactRoutes);
 app.use("/api/emicalculator/", emiRoutes);

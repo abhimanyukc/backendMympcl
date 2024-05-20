@@ -8,7 +8,7 @@ const emiSchema = new mongoose.Schema({
     loanAmount:String,
     interestRate: String,
     duration: String,
-    yearlyInterest: String
+    monthlyEMI: String
 })
 const Emi = mongoose.model("Emi", emiSchema);
 module.exports = Emi;
