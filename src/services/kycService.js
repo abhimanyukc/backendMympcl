@@ -1,13 +1,15 @@
-const Kyc = require("../models/kyc");
 
+
+//kycService.js
+const Kyc = require("../models/kyc");
 class KycService {
        
-    async createKyc(firstName, middleName, lastName, Gender, MaritalStatus, FamilyStatus , Education ,  Cast, Religion, Occupation,HouseType, RoofType, FamilyNo, DateOfBirth, CitizenshipNo,IssuedFrom,IssuedDate,  YearlyTaxNumber, RuralMunicipality,District,Province
-        ,WardNo,Tole,FamilyMemberName,Relationship,MobileNo,IncomeHead, YearlyIncomeAmount,ExpenseHead
-         ,ExpenseAmount,NoOfHouse,RoofOfHouse, NoOfRoom, Cost) {
-        const newKyc = new Kyc({firstName, middleName, lastName, Gender, MaritalStatus, FamilyStatus , Education ,  Cast, Religion, Occupation,HouseType, RoofType, FamilyNo, DateOfBirth, CitizenshipNo,IssuedFrom,IssuedDate,  YearlyTaxNumber, RuralMunicipality,District,Province
-            ,WardNo,Tole,FamilyMemberName,Relationship,MobileNo,IncomeHead, YearlyIncomeAmount,ExpenseHead
-             ,ExpenseAmount,NoOfHouse,RoofOfHouse, NoOfRoom, Cost});
+    async createKyc(firstName, middleName, lastName, gender, maritalStatus, familyStatus , education ,  cast, religion, occupation,houseType, roofType, familyNo, dob, citizenshipNo,issuedFrom,issuedDate,  yearlyTxnNumber, ruralMunicipality,district,province
+        ,wardNo,tole,noOfRoom,familyMember,relationship,mobileNo,incomeHead, yearlyIncomeAmount,expenseHead
+          , roomCost) {
+        const newKyc = new Kyc({firstName, middleName, lastName, gender, maritalStatus, familyStatus , education ,  cast, religion, occupation,houseType, roofType, familyNo, dob, citizenshipNo,issuedFrom,issuedDate,  yearlyTxnNumber, ruralMunicipality,district,province
+            ,wardNo,tole,noOfRoom,familyMember,relationship,mobileNo,incomeHead, yearlyIncomeAmount,expenseHead
+              , roomCost});
         return await newKyc.save()
     }
 
