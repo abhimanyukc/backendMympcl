@@ -11,6 +11,7 @@ const contactRoutes = require("./routes/contactRoute");
 const emiRoutes = require("./routes/emiRoute");
 const kycRoutes = require("./routes/kycRoute");
 const applicationRoutes = require("./routes/applicationFormRoute");
+const careerRoutes = require("./routes/careerRoute");
 
 const app = express();
 
@@ -32,7 +33,7 @@ app.use("/api/contact/", contactRoutes);
 app.use("/api/emicalculator/", emiRoutes);
 app.use("/api/kyc/", kycRoutes);
 app.use("/api/career/ApplicationForm/", applicationRoutes);
-
+app.use("/api/career/", careerRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
