@@ -6,3 +6,4 @@ const router = express.Router();
 router.post("/", newsController.createNews);
 router.get("/", newsController.getAllNews);
 module.exports = router;
+//
