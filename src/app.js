@@ -14,6 +14,7 @@ const applicationRoutes = require("./routes/applicationFormRoute");
 const careerRoutes = require("./routes/careerRoute");
 const newsRoutes = require("./routes/newsRoute");
 const locationRoutes = require("./routes/locationRoute");
+const downloadFormRoutes = require("./routes/downloadFormRoute");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -37,6 +38,7 @@ app.use("/api/career/ApplicationForm/", applicationRoutes);
 app.use("/api/career/", careerRoutes);
 app.use("/api/news/", newsRoutes);
 app.use("/api/location/", locationRoutes);
+app.use("/api/downloadForm/", downloadFormRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
