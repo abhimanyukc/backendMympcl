@@ -16,6 +16,7 @@ const newsRoutes = require("./routes/newsRoute");
 const locationRoutes = require("./routes/locationRoute");
 const downloadFormRoutes = require("./routes/downloadFormRoute");
 const interestRateRoutes = require("./routes/interestRateRoute");
+const remittanceRoutes = require("./routes/remittanceRoute");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -41,6 +42,7 @@ app.use("/api/news/", newsRoutes);
 app.use("/api/location/", locationRoutes);
 app.use("/api/downloadForm/", downloadFormRoutes);
 app.use("/api/interestRate/", interestRateRoutes);
+app.use("/api/remittance/", remittanceRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
