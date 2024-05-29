@@ -5,8 +5,8 @@ class InterestRateController {
     async createInterestRates(req, res) {
         try {
             const interestRates = req.body;
-            const savedInterestRates = await interestRateService.createInterestRates(interestRates);
-            res.json(savedInterestRates);
+            const saveInterestRate = await interestRateService.createInterestRates(interestRates);
+            res.json(saveInterestRate);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }

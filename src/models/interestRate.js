@@ -8,7 +8,7 @@ const mongoose = require("../configuration/dbConfig");
 const interestRateSchema = new mongoose.Schema({
     
     product:String,
-    percentage: String,
+    percentage: Number,
 })
 
 const InterestRate = mongoose.model("InterestRate", interestRateSchema);
