@@ -22,6 +22,10 @@ const healthProgramRoutes = require("./routes/healthProgramRoute");
 const loanRoutes = require("./routes/loanRoute");
 const reportRoutes = require("./routes/reportRoute");
 const galleryRoutes = require("./routes/galleryRoute");
+const gallery1Routes = require("./routes/gallery1Route");
+const gallery2Routes = require("./routes/gallery2Route");
+const gallery3Routes = require("./routes/gallery3Route");
+const gallery4Routes = require("./routes/gallery4Route");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -53,6 +57,10 @@ app.use("/api/healthProgram/", healthProgramRoutes);
 app.use("/api/loan/", loanRoutes);
 app.use("/api/reports/", reportRoutes);
 app.use("/api/gallery/",galleryRoutes);
+app.use("/api/gallery/album1/",gallery1Routes);
+app.use("/api/gallery/album2/",gallery2Routes);
+app.use("/api/gallery/album3/",gallery3Routes);
+app.use("/api/gallery/album4/",gallery4Routes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
