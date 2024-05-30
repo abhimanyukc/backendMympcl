@@ -19,6 +19,9 @@ const interestRateRoutes = require("./routes/interestRateRoute");
 const remittanceRoutes = require("./routes/remittanceRoute");
 const noticeRoutes = require("./routes/noticeRoute");
 const healthProgramRoutes = require("./routes/healthProgramRoute");
+const loanRoutes = require("./routes/loanRoute");
+const reportRoutes = require("./routes/reportRoute");
+const galleryRoutes = require("./routes/galleryRoute");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -47,6 +50,9 @@ app.use("/api/interestRate/", interestRateRoutes);
 app.use("/api/remittance/", remittanceRoutes);
 app.use("/api/notice/", noticeRoutes);
 app.use("/api/healthProgram/", healthProgramRoutes);
+app.use("/api/loan/", loanRoutes);
+app.use("/api/reports/", reportRoutes);
+app.use("/api/gallery/",galleryRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
