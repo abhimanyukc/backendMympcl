@@ -6,7 +6,7 @@ class Gallery1Service {
         return await Gallery1.insertMany(galleries1);
     }
 
-    async getAllGallery1(){
+    async getAllGalleries1(){
         return await Gallery1.find();
     }
 };

@@ -5,7 +5,7 @@ const mongoose = require("../configuration/dbConfig");
 
 const gallery2Schema = new mongoose.Schema({
     
-    no:String,
+    no:Number,
     imageUrl: String,
     altText: String,
 })
