@@ -28,6 +28,10 @@ const gallery3Routes = require("./routes/gallery3Route");
 const gallery4Routes = require("./routes/gallery4Route");
 const serviceRoutes = require("./routes/serviceRoute");
 const informationRoutes = require("./routes/informationRoute");
+const organizationRoutes = require("./routes/organizationRoute");
+const teamMemberRoutes = require("./routes/teamMemberRoute");
+const departmentRoutes = require("./routes/departmentRoute");
+const branchRoutes = require("./routes/branchRoute");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -65,6 +69,10 @@ app.use("/api/gallery/album3/",gallery3Routes);
 app.use("/api/gallery/album4/",gallery4Routes);
 app.use("/api/service/",serviceRoutes);
 app.use("/api/information/",informationRoutes);
+app.use("/api/organization/",organizationRoutes);
+app.use("/api/membership/",teamMemberRoutes);
+app.use("/api/department/",departmentRoutes);
+app.use("/api/branches/",branchRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
