@@ -27,6 +27,7 @@ const gallery2Routes = require("./routes/gallery2Route");
 const gallery3Routes = require("./routes/gallery3Route");
 const gallery4Routes = require("./routes/gallery4Route");
 const serviceRoutes = require("./routes/serviceRoute");
+const informationRoutes = require("./routes/informationRoute");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -63,6 +64,7 @@ app.use("/api/gallery/album2/",gallery2Routes);
 app.use("/api/gallery/album3/",gallery3Routes);
 app.use("/api/gallery/album4/",gallery4Routes);
 app.use("/api/service/",serviceRoutes);
+app.use("/api/information/",informationRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
