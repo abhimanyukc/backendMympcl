@@ -6,18 +6,18 @@ const  emiService = require("../services/emiService");
           
     async createEmi(req,res) {
             try{
-                const {loanType, loanAmount, interestRate, duration, monthlyEMI} = req.body;
-                const saveEmi = await emiService.createEmi(loanType, loanAmount, interestRate, duration, monthlyEMI);
+                const emiS = req.body;
+                const saveEmi = await emiService.createEmi(emiS);
                 res.json(saveEmi);
             } catch(error) {
                 res.status(500).json({error:error.message})
             }
     }
 
-    async getAllEmi(req, res){
+    async getAllEmiS(req, res){
         try{
-              const emi = await emiService.getAllEmi();
-              res.json(emi);
+              const emiS = await emiService.getAllEmiS();
+              res.json(emiS);
         }catch(error) {
             res.status(500).json({error:error.message});
         }

@@ -7,5 +7,5 @@ const emiController = require("../controllers/emiController");
 const router = express.Router();
 
 router.post("/", emiController.createEmi);
-router.get("/", emiController.getAllEmi);
+router.get("/", emiController.getAllEmiS);
 module.exports = router;
