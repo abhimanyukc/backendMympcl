@@ -4,17 +4,17 @@ class NewsController {
 
     async createNews(req,res) {
         try{
-            const {id,title,image,details} = req.body;
-            const saveNews = await newsService.createNews(id,title,image,details);
+            const newses = req.body;
+            const saveNews = await newsService.createNews(newses);
             res.json(saveNews);
         } catch(error) {
             res.status(500).json({error:error.message})
         }
     }
 
-       async getAllNews(req, res){
+       async getAllNewses(req, res){
         try{
-              const news = await newsService.getAllNews();
+              const news = await newsService.getAllNewses();
               res.json(news);
         }catch(error) {
             res.status(500).json({error:error.message});

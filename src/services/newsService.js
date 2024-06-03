@@ -1,12 +1,11 @@
 const News = require("../models/news");
 
 class NewsService {   
-    async createNews(id, title, image, details) {
-        const newNews = new News({ id, title, image, details});
-        return await newNews.save()
+    async createNews(newses) {
+        return await News.insertMany(newses);
     }
 
-    async getAllNews(){
+    async getAllNewses(){
         return await News.find();
     }
 };

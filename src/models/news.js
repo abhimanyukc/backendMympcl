@@ -3,7 +3,7 @@ const mongoose = require("../configuration/dbConfig");
 
 const newsSchema = new mongoose.Schema({
     
-    id:Number,
+    no:Number,
     title: { 
      type:  String,
      required: true
