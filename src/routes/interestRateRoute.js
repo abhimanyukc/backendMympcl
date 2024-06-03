@@ -1,3 +1,4 @@
+// interestRateRoute.js
 const express = require('express');
 const interestRateController = require("../controllers/interestRateController");
 

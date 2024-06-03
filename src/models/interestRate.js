@@ -1,15 +1,13 @@
 
 
-//interestRateService.js
-//creating interestRate model in nodejs
-//importing mongoose from dbConfig.js file
+// interestRate.js
 const mongoose = require("../configuration/dbConfig");
 
 const interestRateSchema = new mongoose.Schema({
-    
-    product:String,
+    product: String,
     percentage: Number,
-})
+    category: String // New field to categorize intdet objects
+});
 
 const InterestRate = mongoose.model("InterestRate", interestRateSchema);
 
