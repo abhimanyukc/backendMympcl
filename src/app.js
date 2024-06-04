@@ -10,6 +10,7 @@ const path = require('path');
 const contactRoutes = require("./routes/contactRoute");
 const emiRoutes = require("./routes/emiRoute");
 const kycRoutes = require("./routes/kycRoute");
+const kycTabRoutes = require("./routes/kycTabRoute");
 const applicationRoutes = require("./routes/applicationFormRoute");
 const careerRoutes = require("./routes/careerRoute");
 const newsRoutes = require("./routes/newsRoute");
@@ -78,6 +79,7 @@ app.use('/uploadsRemittance', express.static(path.join(__dirname, 'uploadsRemitt
 app.use("/api/contact/", contactRoutes);
 app.use("/api/emiCalculator/", emiRoutes);
 app.use("/api/kyc/", kycRoutes);
+app.use("/api/kycTab/", kycTabRoutes);
 app.use("/api/career/ApplicationForm/", applicationRoutes);
 app.use("/api/career/", careerRoutes);
 app.use("/api/news/", newsRoutes);
