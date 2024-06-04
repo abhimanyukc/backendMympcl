@@ -1,3 +1,6 @@
+
+
+//remittanceService.js
 const Remittance = require("../models/remittance");
 
 class RemittanceService {

@@ -48,6 +48,33 @@ if (!fs.existsSync('uploads')) {
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
+// Create 'uploads' directory if it doesn't exist
+if (!fs.existsSync('uploadsRemittance')) {
+    fs.mkdirSync('uploadsRemittance');
+}
+// Middleware to handle static files without extensions
+//When a request matches this route, the middleware function will be executed.
+app.use('/uploadsRemittance', (req, res, next) => {
+    //The path.join(__dirname, 'uploadsRemittance', req.path) 
+    //concatenates the current directory (__dirname), the uploadsRemittance folder, and the requested path.
+    let filePath = path.join(__dirname, 'uploadsRemittance', req.path);
+
+    // Try with different common image extensions
+    const extensions = ['.png', '.jpg', '.jpeg', '.gif'];
+    //It checks if any of these extensions exist alongside the requested file path.
+    const file = extensions.find(ext => fs.existsSync(filePath + ext));
+//If an image file with any of these extensions is found, it modifies the request URL by appending the extension (e.g., /helloworld.png)
+    if (file) {
+        req.url += file;
+    }
+    //After processing, the middleware calls next() to pass control to the next middleware in the chain.
+    //If no image file with the specified extensions is found, the original request URL remains unchanged.
+    next();
+});
+
+// Serve static files from 'uploadsRemittance' directory
+app.use('/uploadsRemittance', express.static(path.join(__dirname, 'uploadsRemittance')));
+
 app.use("/api/contact/", contactRoutes);
 app.use("/api/emiCalculator/", emiRoutes);
 app.use("/api/kyc/", kycRoutes);
