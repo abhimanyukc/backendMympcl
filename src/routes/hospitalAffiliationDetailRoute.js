@@ -1,5 +1,5 @@
 const express = require('express');
-const  hospitalAffiliationDetailController = require("../controllers/healthprogram/hospitalAffiliationDetailController");
+const  hospitalAffiliationDetailController = require("../controllers/health/hospitalAffiliationDetailController");
 
 const router = express.Router();
 
