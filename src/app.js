@@ -37,6 +37,8 @@ const teamMemberRoutes = require("./routes/teamMemberRoute");
 const departmentRoutes = require("./routes/departmentRoute");
 const branchRoutes = require("./routes/branchRoute");
 const formDetailRoute = require("./routes/formDetailRoute");
+const signUpRoute = require("./routes/signUpRoute");
+
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -110,7 +112,7 @@ app.use("/api/organization/",organizationRoutes);
 app.use("/api/membership/",teamMemberRoutes);
 app.use("/api/department/",departmentRoutes);
 app.use("/api/branches/",branchRoutes);
-
+app.use("/api/signUp/",signUpRoute);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
