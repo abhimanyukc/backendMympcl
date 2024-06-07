@@ -1,12 +1,10 @@
-
-
-//app.js
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
-
+require('dotenv').config();
+const authRoutes = require("./routes/authRoutes");
 const contactRoutes = require("./routes/contactRoute");
 const emiRoutes = require("./routes/emiRoute");
 const kycRoutes = require("./routes/kycRoute");
@@ -39,8 +37,7 @@ const branchRoutes = require("./routes/branchRoute");
 const formDetailRoute = require("./routes/formDetailRoute");
 const signUpRoute = require("./routes/signUpRoute");
 const loginRoute = require("./routes/loginRoute");
-
-
+const passwordResetRoutes = require('./routes/passwordResetRoutes');
 
 const app = express();
 
@@ -57,28 +54,19 @@ if (!fs.existsSync('uploads')) {
 // Serving static files from the 'uploads' directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-
-// Create 'uploads' directory if it doesn't exist
+// Create 'uploadsRemittance' directory if it doesn't exist
 if (!fs.existsSync('uploadsRemittance')) {
     fs.mkdirSync('uploadsRemittance');
 }
-// Middleware to handle static files without extensions
-//When a request matches this route, the middleware function will be executed.
-app.use('/uploadsRemittance', (req, res, next) => {
-    //The path.join(__dirname, 'uploadsRemittance', req.path) 
-    //concatenates the current directory (__dirname), the uploadsRemittance folder, and the requested path.
-    let filePath = path.join(__dirname, 'uploadsRemittance', req.path);
 
-    // Try with different common image extensions
+// Middleware to handle static files without extensions
+app.use('/uploadsRemittance', (req, res, next) => {
+    let filePath = path.join(__dirname, 'uploadsRemittance', req.path);
     const extensions = ['.png', '.jpg', '.jpeg', '.gif'];
-    //It checks if any of these extensions exist alongside the requested file path.
     const file = extensions.find(ext => fs.existsSync(filePath + ext));
-//If an image file with any of these extensions is found, it modifies the request URL by appending the extension (e.g., /helloworld.png)
     if (file) {
         req.url += file;
     }
-    //After processing, the middleware calls next() to pass control to the next middleware in the chain.
-    //If no image file with the specified extensions is found, the original request URL remains unchanged.
     next();
 });
 
@@ -104,19 +92,21 @@ app.use("/api/healthProgram/femaleNutrition/", femaleNutritionRoutes);
 app.use("/api/healthProgram/lifeSaving/", lifeSavingRoutes);
 app.use("/api/loan/", loanRoutes);
 app.use("/api/reports/", reportRoutes);
-app.use("/api/gallery/",galleryRoutes);
-app.use("/api/gallery/album1/",gallery1Routes);
-app.use("/api/gallery/album2/",gallery2Routes);
-app.use("/api/gallery/album3/",gallery3Routes);
-app.use("/api/gallery/album4/",gallery4Routes);
-app.use("/api/service/",serviceRoutes);
-app.use("/api/information/",informationRoutes);
-app.use("/api/organization/",organizationRoutes);
-app.use("/api/membership/",teamMemberRoutes);
-app.use("/api/department/",departmentRoutes);
-app.use("/api/branches/",branchRoutes);
-app.use("/api/signUp/",signUpRoute);
+app.use("/api/gallery/", galleryRoutes);
+app.use("/api/gallery/album1/", gallery1Routes);
+app.use("/api/gallery/album2/", gallery2Routes);
+app.use("/api/gallery/album3/", gallery3Routes);
+app.use("/api/gallery/album4/", gallery4Routes);
+app.use("/api/service/", serviceRoutes);
+app.use("/api/information/", informationRoutes);
+app.use("/api/organization/", organizationRoutes);
+app.use("/api/membership/", teamMemberRoutes);
+app.use("/api/department/", departmentRoutes);
+app.use("/api/branches/", branchRoutes);
+app.use("/api/signUp/", signUpRoute);
 app.use("/api/login/", loginRoute);
+app.use("/api/reset-password/", passwordResetRoutes);
+app.use("/api/auth",  authRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
