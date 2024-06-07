@@ -1,35 +1,39 @@
-const SignUp = require("../models/signUp");
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const transporter = require("../configuration/nodemailer"); // Injected transporter
-
-require('dotenv').config();
+const crypto = require("crypto");
+const bcrypt = require("bcrypt");
+const SignUp = require("../models/signUp"); // Adjust the path as needed
+const transporter = require("../configuration/nodemailer"); // Adjust the path as needed
 
 class AuthService {
-    async login(email, password) {
+    async generateResetToken(email) {
         const user = await SignUp.findOne({ email });
-        if (!user || !await bcrypt.compare(password, user.password)) {
-            throw new Error('Invalid email or password');
+        if (!user) {
+            throw new Error("User not found");
         }
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        return { user, token };
+
+        const token = crypto.randomBytes(48).toString('hex'); // Generate secure token
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+
+        await user.save();
+        return token;
     }
 
     async sendResetPasswordEmail(email, resetUrl) {
         const user = await SignUp.findOne({ email });
-        if (!user) throw new Error('No user with that email');
-
-        const token = generateRandomToken(); // Implement token generation securely
-
-        user.resetPasswordToken = token;
-        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-        await user.save();
+        if (!user) {
+            throw new Error("User not found");
+        }
 
         const mailOptions = {
-            to: email,
-            from: process.env.EMAIL_USER,
-            subject: 'Password Reset',
-            text: `Click the following link to reset your password: ${resetUrl}`
+            to: user.email,
+            from: process.env.EMAIL_SENDER,
+            subject: "Password Reset",
+            html: `
+                <p>You are receiving this email because you (or someone else) have requested the reset of the password for your account.</p>
+                <p>Please click on the following link, or paste this into your browser to complete the process:</p>
+                <p><a href="${resetUrl}">Reset Password</a></p>
+                <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
+            `
         };
 
         await transporter.sendMail(mailOptions);
@@ -38,13 +42,16 @@ class AuthService {
     async resetPassword(token, newPassword) {
         const user = await SignUp.findOne({
             resetPasswordToken: token,
-            resetPasswordExpires: { $gt: Date.now() }
+            resetPasswordExpires: { $gt: Date.now() },
         });
 
-        if (!user) throw new Error('Password reset token is invalid or has expired');
+        if (!user) {
+            throw new Error("Invalid or expired reset token");
+        }
 
-        const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(newPassword, salt);
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+        user.password = hashedPassword;
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
 
@@ -53,8 +60,3 @@ class AuthService {
 }
 
 module.exports = new AuthService();
-
-// Function to generate a random token securely
-function generateRandomToken() {
-    return crypto.randomBytes(32).toString('hex');
-}
