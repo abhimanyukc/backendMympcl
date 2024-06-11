@@ -40,30 +40,20 @@ class PasswordResetController {
     }
     
     async resetPassword(req, res) {
-        const { token, newPassword } = req.body;
         try {
-            const user = await SignUp.findOne({
-                resetPasswordToken: token,
-                resetPasswordExpires: { $gt: Date.now() },
-            });
-    
-            if (!user) {
-                return res.status(400).json({ error: "Invalid or expired reset token" });
-            }
-    
-            const hashedPassword = await bcrypt.hash(newPassword, 10);
-    
-            user.password = hashedPassword;
-            user.resetPasswordToken = undefined;
-            user.resetPasswordExpires = undefined;
-    
-            await user.save();
-    
-            res.status(200).json({ message: "Password has been reset successfully" });
+            const { token } = req.params;
+            const { newPassword } = req.body;
+            await authService.resetPassword(token, newPassword);
+            res.json({ message: 'Password reset successful' });
         } catch (error) {
-            console.error('Error resetting password:', error);
-            res.status(500).json({ error: error.message });
+            res.status(400).json({ error: error.message });
         }
+    }
+    async renderResetPasswordPage(req, res) {
+        // Fetch user data based on the token
+        const { token } = req.params;
+        // Render the reset password page with the token
+        res.render('reset-password', { token });
     }
     
     async verifyRecoveryCode(req, res) {

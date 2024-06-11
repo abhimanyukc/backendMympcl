@@ -1,3 +1,5 @@
+//app.js
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -36,7 +38,7 @@ const departmentRoutes = require("./routes/departmentRoute");
 const branchRoutes = require("./routes/branchRoute");
 const formDetailRoute = require("./routes/formDetailRoute");
 const signUpRoute = require("./routes/signUpRoute");
-const loginRoute = require("./routes/loginRoute");
+const loginRoute = require("./routes/loanRoute");
 const passwordResetRoutes = require('./routes/passwordResetRoutes');
 
 const app = express();

@@ -47,7 +47,6 @@ signUpSchema.pre('save', async function (next) {
     }
 });
 
-
 const SignUp = mongoose.model("SignUp", signUpSchema);
 
 module.exports = SignUp;

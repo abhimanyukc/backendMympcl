@@ -2,6 +2,10 @@ const express = require('express');
 const authService = require('../services/authService');
 
 const router = express.Router();
+const passwordResetController = require("../controllers/auth/passwordResetController");
+
+// Route for rendering the reset password page
+router.get('/:token', passwordResetController.renderResetPasswordPage);
 
 // Route for sending password reset email (forgot password)
 router.post('/forgot', async (req, res) => {

@@ -18,3 +18,6 @@ router.post("/forgot-password", passwordResetController.forgotPassword);
 router.post("/reset-password/:token", passwordResetController.resetPassword);
 
 module.exports = router;
+
+
+

@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
-const SignUp = require("../models/signUp"); // Adjust the path as needed
-const transporter = require("../configuration/nodemailer"); // Adjust the path as needed
+const SignUp = require("../models/signUp");
+const transporter = require("../configuration/nodemailer");
 
 class AuthService {
     async generateResetToken(email) {
@@ -10,7 +10,7 @@ class AuthService {
             throw new Error("User not found");
         }
 
-        const token = crypto.randomBytes(48).toString('hex'); // Generate secure token
+        const token = crypto.randomBytes(48).toString('hex');
         user.resetPasswordToken = token;
         user.resetPasswordExpires = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
 
