@@ -1,5 +1,4 @@
-
-//signUpService.js
+// services/signUpService.js
 const SignUp = require("../models/signUp");
 
 class SignUpService {
@@ -11,6 +10,6 @@ class SignUpService {
     async getAllSignUps() {
         return await SignUp.find();
     }
-};
+}
 
 module.exports = new SignUpService();

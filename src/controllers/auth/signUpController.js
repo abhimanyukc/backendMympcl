@@ -1,5 +1,3 @@
-
-
 //signUpController.js
 const signUpService = require("../../services/signUpService");
 

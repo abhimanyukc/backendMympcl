@@ -1,39 +1,15 @@
+// models/signUp.js
 const mongoose = require("../configuration/dbConfig");
 const bcrypt = require('bcrypt');
 
 const signUpSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        index: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    phone: {
-        type: String,
-        required: true
-    },
-    address: {
-        type: String,
-        required: true
-    },
-    accountType: {
-        type: String,
-        required: true
-    },
-    accountNumber: {
-        type: String,
-        required: true,
-        unique: true,
-        index: true
-    },
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true, index: true },
+    password: { type: String, required: true },
+    phone: { type: String, required: true },
+    address: { type: String, required: true },
+    accountType: { type: String, required: true },
+    accountNumber: { type: String, required: true, unique: true, index: true },
     resetPasswordToken: String,
     resetPasswordExpires: Date
 });

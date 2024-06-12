@@ -1,19 +1,27 @@
-
-
-
-// services/loginService.js
 const SignUp = require("../models/signUp");
 const bcrypt = require('bcrypt');
 
 class LoginService {
     async authenticateUser(email, password) {
-        const user = await SignUp.findOne({ email });
-        if (user && await bcrypt.compare(password, user.password)) {
+        try {
+            const user = await SignUp.findOne({ email });
+            if (!user) {
+                console.log("User not found with email:", email);
+                throw new Error("Invalid email or password");
+            }
+
+            const isPasswordValid = await bcrypt.compare(password, user.password);
+            if (!isPasswordValid) {
+                console.log("Password does not match for email:", email);
+                throw new Error("Invalid email or password");
+            }
+
             return user;
+        } catch (error) {
+            console.error("Authentication error:", error.message);
+            throw new Error("Authentication failed");
         }
-        throw new Error("Invalid email or password");
     }
 }
 
 module.exports = new LoginService();
-
