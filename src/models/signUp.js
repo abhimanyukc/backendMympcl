@@ -9,7 +9,8 @@ const signUpSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        index: true
     },
     password: {
         type: String,
@@ -30,7 +31,8 @@ const signUpSchema = new mongoose.Schema({
     accountNumber: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        index: true
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date

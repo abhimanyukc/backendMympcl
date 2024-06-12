@@ -1,32 +1,29 @@
-const authService = require("../../services/authService");
+const ForgotPasswordService = require('../../services/forgotPasswordService');
+const AuthService = require('../../services/authService'); // Corrected import for authService
 
 class AuthController {
-    constructor(authService) {
-        this.authService = authService;
-    }
-
     async forgotPassword(req, res) {
+        const { email } = req.body;
+
         try {
-            const { email } = req.body;
-            const token = await this.authService.generateResetToken(email);
-            const resetUrl = `${req.protocol}://${req.get('host')}/reset-password/${token}`;
-            await this.authService.sendResetPasswordEmail(email, resetUrl);
-            res.json({ message: 'Reset password email sent' });
+            const response = await ForgotPasswordService.sendResetEmail(email);
+            res.status(200).json(response);
         } catch (error) {
             res.status(400).json({ error: error.message });
         }
     }
 
     async resetPassword(req, res) {
+        const { token } = req.params;
+        const { newPassword } = req.body;
+
         try {
-            const { token } = req.params;
-            const { newPassword } = req.body;
-            await this.authService.resetPassword(token, newPassword);
-            res.json({ message: 'Password reset successful' });
+            await AuthService.resetPassword(token, newPassword); // Using AuthService for resetting password
+            res.status(200).json({ message: "Password has been updated" });
         } catch (error) {
-            res.status(400).json({ error: error.message });
+            res.status(500).json({ error: error.message });
         }
     }
 }
 
-module.exports = new AuthController(authService);
+module.exports = new AuthController();

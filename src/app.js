@@ -1,12 +1,9 @@
-//app.js
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 require('dotenv').config();
-const authRoutes = require("./routes/authRoutes");
 const contactRoutes = require("./routes/contactRoute");
 const emiRoutes = require("./routes/emiRoute");
 const kycRoutes = require("./routes/kycRoute");
@@ -38,8 +35,8 @@ const departmentRoutes = require("./routes/departmentRoute");
 const branchRoutes = require("./routes/branchRoute");
 const formDetailRoute = require("./routes/formDetailRoute");
 const signUpRoute = require("./routes/signUpRoute");
-const loginRoute = require("./routes/loanRoute");
-const passwordResetRoutes = require('./routes/passwordResetRoutes');
+const loginRoute = require("./routes/loginRoute");
+const authRoutes = require('./routes/authRoute');
 
 const app = express();
 
@@ -47,6 +44,8 @@ const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Create 'uploads' directory if it doesn't exist
 if (!fs.existsSync('uploads')) {
@@ -107,8 +106,8 @@ app.use("/api/department/", departmentRoutes);
 app.use("/api/branches/", branchRoutes);
 app.use("/api/signUp/", signUpRoute);
 app.use("/api/login/", loginRoute);
-app.use("/api/reset-password/", passwordResetRoutes);
-app.use("/api/auth",  authRoutes);
+app.use('/api/auth', authRoutes);
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
